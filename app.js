@@ -37,9 +37,15 @@ app.use(use.passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-var Account = require('.models/account');
+var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser //
+passport.serializeUser(Account.serializeUser()); //formatting thing so everything is serialized
+passport.deserializeUser(Account.deserializeUser());
+
+
+var mongoUrl = 'mongodb://localhost:27017/ec-backend';
+mongoose.connect(mongoUrl);
+//mongoose connets to passport which connects to App js (node is connected)
 
 app.use('/', routes);
 app.use('/users', users);
