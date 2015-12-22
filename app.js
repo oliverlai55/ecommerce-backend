@@ -36,6 +36,13 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+//set Headers
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods","POST, GET, OPTIONS, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
