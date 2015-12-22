@@ -26,13 +26,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'Oliver Lai Secret'; //secret is the pw for the pw
+  secret: 'Oliver Lai Secret',
   resave: false,
   saveUninitialized: false
 }));
 
-app.use(passport.initialized());
-app.use(use.passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
